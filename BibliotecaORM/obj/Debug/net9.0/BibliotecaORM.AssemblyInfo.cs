@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BibliotecaORM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+455a048b8bcfc406f8e67871bcd6c149d8e02c13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f952ea875bdcae8d7865c61148dfc24f1b691fd0")]
 [assembly: System.Reflection.AssemblyProductAttribute("BibliotecaORM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BibliotecaORM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
