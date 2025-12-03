@@ -1,0 +1,42 @@
+﻿@page
+@model WebProducto.Pages.productos.IndexModel
+
+@{
+    ViewData["Title"] = "Indice";
+}
+
+<h1>Indice</h1>
+
+<p>
+    <a asp-page="Create">Crear nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto[0].Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto[0].Precio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Producto) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.IDProducto">Editar</a> |
+                <a asp-page="./Details" asp-route-id="@item.IDProducto">Detalles</a> |
+                <a asp-page="./Delete" asp-route-id="@item.IDProducto">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

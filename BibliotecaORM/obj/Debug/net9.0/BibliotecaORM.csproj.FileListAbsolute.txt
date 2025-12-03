@@ -1,0 +1,37 @@
+C:\Informacion\2025\III Cuatrimestre\Progra4\GrpM\Nueva carpeta\SolucionORM\BibliotecaORM\bin\Debug\net9.0\BibliotecaORM.deps.json
+C:\Informacion\2025\III Cuatrimestre\Progra4\GrpM\Nueva carpeta\SolucionORM\BibliotecaORM\bin\Debug\net9.0\BibliotecaORM.dll
+C:\Informacion\2025\III Cuatrimestre\Progra4\GrpM\Nueva carpeta\SolucionORM\BibliotecaORM\bin\Debug\net9.0\BibliotecaORM.pdb
+C:\Informacion\2025\III Cuatrimestre\Progra4\GrpM\Nueva carpeta\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.csproj.AssemblyReference.cache
+C:\Informacion\2025\III Cuatrimestre\Progra4\GrpM\Nueva carpeta\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Informacion\2025\III Cuatrimestre\Progra4\GrpM\Nueva carpeta\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.AssemblyInfoInputs.cache
+C:\Informacion\2025\III Cuatrimestre\Progra4\GrpM\Nueva carpeta\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.AssemblyInfo.cs
+C:\Informacion\2025\III Cuatrimestre\Progra4\GrpM\Nueva carpeta\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.csproj.CoreCompileInputs.cache
+C:\Informacion\2025\III Cuatrimestre\Progra4\GrpM\Nueva carpeta\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.dll
+C:\Informacion\2025\III Cuatrimestre\Progra4\GrpM\Nueva carpeta\SolucionORM\BibliotecaORM\obj\Debug\net9.0\refint\BibliotecaORM.dll
+C:\Informacion\2025\III Cuatrimestre\Progra4\GrpM\Nueva carpeta\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.pdb
+C:\Informacion\2025\III Cuatrimestre\Progra4\GrpM\Nueva carpeta\SolucionORM\BibliotecaORM\obj\Debug\net9.0\ref\BibliotecaORM.dll
+C:\Users\dence\Downloads\SolucionORM\SolucionORM\BibliotecaORM\bin\Debug\net9.0\BibliotecaORM.deps.json
+C:\Users\dence\Downloads\SolucionORM\SolucionORM\BibliotecaORM\bin\Debug\net9.0\BibliotecaORM.dll
+C:\Users\dence\Downloads\SolucionORM\SolucionORM\BibliotecaORM\bin\Debug\net9.0\BibliotecaORM.pdb
+C:\Users\dence\Downloads\SolucionORM\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.csproj.AssemblyReference.cache
+C:\Users\dence\Downloads\SolucionORM\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dence\Downloads\SolucionORM\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.AssemblyInfoInputs.cache
+C:\Users\dence\Downloads\SolucionORM\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.AssemblyInfo.cs
+C:\Users\dence\Downloads\SolucionORM\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.csproj.CoreCompileInputs.cache
+C:\Users\dence\Downloads\SolucionORM\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.dll
+C:\Users\dence\Downloads\SolucionORM\SolucionORM\BibliotecaORM\obj\Debug\net9.0\refint\BibliotecaORM.dll
+C:\Users\dence\Downloads\SolucionORM\SolucionORM\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.pdb
+C:\Users\dence\Downloads\SolucionORM\SolucionORM\BibliotecaORM\obj\Debug\net9.0\ref\BibliotecaORM.dll
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\bin\Debug\net9.0\BibliotecaORM.deps.json
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\bin\Debug\net9.0\BibliotecaORM.dll
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\bin\Debug\net9.0\BibliotecaORM.pdb
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.csproj.AssemblyReference.cache
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.AssemblyInfoInputs.cache
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.AssemblyInfo.cs
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.csproj.CoreCompileInputs.cache
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.sourcelink.json
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.dll
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\refint\BibliotecaORM.dll
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.pdb
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\ref\BibliotecaORM.dll
