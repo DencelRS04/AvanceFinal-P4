@@ -4,10 +4,10 @@
     ViewData["Title"] = "Productos";
 }
 
-<h2>Productos</h2>
+<h2>Mantenimiento de Productos</h2>
 
 <p>
-    <a class="btn btn-success" asp-page="Create">➕ Nuevo Producto</a>
+    <a class="btn btn-success" asp-page="Create">Nuevo Producto</a>
 </p>
 
 <table>
@@ -16,21 +16,22 @@
             <th>Número</th>
             <th>Nombre</th>
             <th>Precio</th>
-            <th style="width:200px;">Acciones</th>
+            <th>Acciones</th>
         </tr>
     </thead>
-
     <tbody>
         @foreach (var p in Model.Productos)
         {
             <tr>
                 <td>@p.NumeroProducto</td>
-                <td>@p.Nombre</td>
+                <td>@p.NombreProducto</td>
                 <td>@p.Precio</td>
-
                 <td>
-                    <a class="btn btn-warning btn-sm" asp-page="Edit" asp-route-id="@p.NumeroProducto">Editar</a>
-                    <a class="btn btn-danger btn-sm" asp-page="Delete" asp-route-id="@p.NumeroProducto">Eliminar</a>
+                    <a class="btn btn-warning btn-sm"
+                       asp-page="Edit"
+                       asp-route-numero="@p.NumeroProducto"
+                       asp-route-nombre="@p.NombreProducto"
+                       asp-route-precio="@p.Precio">Editar</a>
                 </td>
             </tr>
         }

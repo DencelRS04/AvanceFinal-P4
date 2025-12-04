@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Biblioteca.Models;
 using WebProducto.Services;
+using ServiceReferenceAlmacen;
 
 namespace WebProducto.Pages.Productos
 {
@@ -15,11 +15,12 @@ namespace WebProducto.Pages.Productos
         }
 
         [BindProperty]
-        public ProductoDTO Producto { get; set; }
+        public Producto Producto { get; set; } = new Producto();
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
-            Producto = await _almacen.ObtenerProducto(id);
+            var lista = await _almacen.ListarProductosAsync();
+            Producto = lista.FirstOrDefault(p => p.NumeroProducto == id);
 
             if (Producto == null)
                 return NotFound();
@@ -29,12 +30,22 @@ namespace WebProducto.Pages.Productos
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var resp = await _almacen.ModificarProducto(Producto);
+            if (!ModelState.IsValid)
+                return Page();
 
-            if (resp.Exito)
-                return RedirectToPage("./Index");
+            Producto.TipoTransaccion = "MODIFICAR";
 
-            ModelState.AddModelError("", resp.Mensaje);
+            var resultado = await _almacen.ProcesarProductoAsync(Producto);
+
+            if (resultado != null && resultado.ResultadoOperacion)
+            {
+                TempData["Mensaje"] = "¡Proceso finalizado de forma exitosa!";
+                return RedirectToPage("Index");
+            }
+
+            ModelState.AddModelError(string.Empty,
+                "Error al realizar el proceso: " + (resultado?.Mensaje ?? "Error desconocido"));
+
             return Page();
         }
     }

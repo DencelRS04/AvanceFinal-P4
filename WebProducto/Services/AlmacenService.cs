@@ -1,77 +1,30 @@
-﻿using SolucionORM.Model;
-using System.Net.Http.Json;
+﻿using ServiceReferenceAlmacen;
+using System.Threading.Tasks;
 
 namespace WebProducto.Services
 {
     public class AlmacenService : IAlmacenService
     {
-        private readonly HttpClient _http;
+        private readonly ServiceClient _client;
 
-        public AlmacenService(HttpClient http)
+        public AlmacenService()
         {
-            _http = http;
+            _client = new ServiceClient(ServiceClient.EndpointConfiguration.BasicHttpBinding_IService);
         }
 
-        public async Task<List<ProductoDTO>> ObtenerProductos()
+        public async Task<Resultado> ProcesarProducto(Producto p)
         {
-            return await _http.GetFromJsonAsync<List<ProductoDTO>>(
-                "http://TU_WS/WS_ALMACEN1/listar"
-            );
+            return await _client.ProcesarProductoAsync(p);
         }
 
-        public async Task<ProductoDTO> ObtenerProducto(int id)
+        public async Task<Resultado> ProcesarProveedor(Proveedor p)
         {
-            return await _http.GetFromJsonAsync<ProductoDTO>(
-                $"http://TU_WS/WS_ALMACEN1/buscar?id={id}"
-            );
+            return await _client.ProcesarProveedorAsync(p);
         }
 
-        public async Task<RespuestaWS> GuardarProducto(ProductoDTO dto)
+        public async Task<Resultado> ProcesarCompra(Compra c)
         {
-            var resp = await _http.PostAsJsonAsync("http://TU_WS/WS_ALMACEN1/guardar", dto);
-            return await resp.Content.ReadFromJsonAsync<RespuestaWS>();
-        }
-
-        public async Task<RespuestaWS> ModificarProducto(ProductoDTO dto)
-        {
-            var resp = await _http.PostAsJsonAsync("http://TU_WS/WS_ALMACEN1/modificar", dto);
-            return await resp.Content.ReadFromJsonAsync<RespuestaWS>();
-        }
-
-        // ----------------- PROVEEDORES -----------------
-
-        public async Task<List<ProveedorDTO>> ObtenerProveedores()
-        {
-            return await _http.GetFromJsonAsync<List<ProveedorDTO>>(
-                "http://TU_WS/WS_ALMACEN2/listar"
-            );
-        }
-
-        public async Task<ProveedorDTO> ObtenerProveedor(int id)
-        {
-            return await _http.GetFromJsonAsync<ProveedorDTO>(
-                $"http://TU_WS/WS_ALMACEN2/buscar?id={id}"
-            );
-        }
-
-        public async Task<RespuestaWS> GuardarProveedor(ProveedorDTO dto)
-        {
-            var resp = await _http.PostAsJsonAsync("http://TU_WS/WS_ALMACEN2/guardar", dto);
-            return await resp.Content.ReadFromJsonAsync<RespuestaWS>();
-        }
-
-        public async Task<RespuestaWS> ModificarProveedor(ProveedorDTO dto)
-        {
-            var resp = await _http.PostAsJsonAsync("http://TU_WS/WS_ALMACEN2/modificar", dto);
-            return await resp.Content.ReadFromJsonAsync<RespuestaWS>();
-        }
-
-        public async Task<RespuestaWS> InactivarProveedor(string cedula)
-        {
-            var resp = await _http.PostAsJsonAsync("http://TU_WS/WS_ALMACEN2/inactivar",
-                new { Cedula = cedula });
-
-            return await resp.Content.ReadFromJsonAsync<RespuestaWS>();
+            return await _client.ProcesarCompraAsync(c);
         }
     }
 }

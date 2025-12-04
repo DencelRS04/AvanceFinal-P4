@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Biblioteca.Models;
+using ServiceReferenceAlmacen;
 using WebProducto.Services;
 
 namespace WebProducto.Pages.Productos
@@ -9,35 +9,33 @@ namespace WebProducto.Pages.Productos
     {
         private readonly IAlmacenService _almacen;
 
-        [BindProperty]
-        public ProductoDTO Producto { get; set; }
-
         public DeleteModel(IAlmacenService almacen)
         {
             _almacen = almacen;
         }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        [BindProperty]
+        public Producto Producto { get; set; } = new Producto();
+
+        public IActionResult OnGet(string numero, string nombre, decimal precio)
         {
-            Producto = await _almacen.ObtenerProducto(id);
-
-            if (Producto == null)
-                return NotFound();
-
+            Producto.NumeroProducto = numero;
+            Producto.NombreProducto = nombre;
+            Producto.Precio = precio;
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            // Esto depende si tu WS permite eliminar
-            var resp = await _almacen.ModificarProducto(
-                new ProductoDTO
-                {
-                    NumeroProducto = Producto.NumeroProducto,
-                    Nombre = Producto.Nombre,
-                    Precio = Producto.Precio
-                }
-            );
+            Producto.TipoTransaccion = "2"; // WS espera 1=Agregar, 2=Modificar
+
+            var resp = await _almacen.ProcesarProducto(Producto);
+
+            if (!resp.ResultadoOperacion)
+            {
+                ModelState.AddModelError("", resp.Mensaje);
+                return Page();
+            }
 
             return RedirectToPage("./Index");
         }

@@ -1,0 +1,28 @@
+﻿@page
+@model WebProducto.Pages.Proveedores.CreateModel
+@{
+    ViewData["Title"] = "Nuevo Proveedor";
+}
+
+<h2>Registrar Proveedor</h2>
+
+<form method="post">
+
+    <label>Cédula Jurídica</label>
+    <input asp-for="Proveedor.CedulaJuridica" />
+
+    <label>Nombre de la Empresa</label>
+    <input asp-for="Proveedor.NombreEmpresa" />
+
+    <label>Nombre del Contacto</label>
+    <input asp-for="Proveedor.NombreContacto" />
+
+    <label>Teléfono</label>
+    <input asp-for="Proveedor.Telefono" />
+
+    <label>Correo</label>
+    <input asp-for="Proveedor.Correo" />
+
+    <button class="btn btn-success" style="margin-top:10px;">Guardar</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
+</form>

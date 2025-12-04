@@ -1,9 +1,10 @@
-﻿using SolucionORM.Model;
+﻿using ServiceReferenceAuth;
+using System.Threading.Tasks;
 
 namespace WebProducto.Services
 {
     public interface IAuthService
     {
-        Task<RespuestaWS> Autenticar(LoginRequest request);
+        Task<AutenticacionResponse> Login(string usuario, string contrasenia, int tipo);
     }
 }

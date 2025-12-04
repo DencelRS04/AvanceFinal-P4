@@ -1,21 +1,22 @@
-﻿using SolucionORM.Model;
-using System.Net.Http.Json;
+﻿using ServiceReferenceAuth;
+using System.Threading.Tasks;
 
 namespace WebProducto.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly HttpClient _http;
+        private readonly AutenticacionClient _client;
 
-        public AuthService(HttpClient http)
+        public AuthService()
         {
-            _http = http;
+            _client = new AutenticacionClient(
+                AutenticacionClient.EndpointConfiguration.BasicHttpBinding_IAutenticacion
+            );
         }
 
-        public async Task<RespuestaWS> Autenticar(LoginRequest request)
+        public Task<AutenticacionResponse> Login(string usuario, string contrasenia, int tipo)
         {
-            var resp = await _http.PostAsJsonAsync("http://TU_WS/WS_AUTENTICACION1", request);
-            return await resp.Content.ReadFromJsonAsync<RespuestaWS>();
+            return _client.AutenticarUsuarioAsync(usuario, contrasenia, tipo);
         }
     }
 }

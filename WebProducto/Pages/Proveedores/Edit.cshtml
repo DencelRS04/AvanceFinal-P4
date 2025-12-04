@@ -11,11 +11,11 @@
     <label>Cédula Jurídica</label>
     <input asp-for="Proveedor.CedulaJuridica" readonly />
 
-    <label>Empresa</label>
-    <input asp-for="Proveedor.Empresa" />
+    <label>Nombre de la Empresa</label>
+    <input asp-for="Proveedor.NombreEmpresa" />
 
-    <label>Contacto</label>
-    <input asp-for="Proveedor.Contacto" />
+    <label>Nombre del Contacto</label>
+    <input asp-for="Proveedor.NombreContacto" />
 
     <label>Teléfono</label>
     <input asp-for="Proveedor.Telefono" />
@@ -26,7 +26,6 @@
     <label>Estado</label>
     <input asp-for="Proveedor.Estado" readonly />
 
-    <button class="btn btn-primary mt-3">Actualizar</button>
+    <button class="btn btn-primary" style="margin-top:10px;">Guardar cambios</button>
     <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
-
 </form>

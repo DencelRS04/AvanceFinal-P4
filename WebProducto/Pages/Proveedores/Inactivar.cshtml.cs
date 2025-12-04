@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Biblioteca.Models;
 using WebProducto.Services;
+using ServiceReferenceAlmacen;
 
 namespace WebProducto.Pages.Proveedores
 {
@@ -15,11 +15,12 @@ namespace WebProducto.Pages.Proveedores
         }
 
         [BindProperty]
-        public ProveedorDTO Proveedor { get; set; }
+        public Proveedor Proveedor { get; set; } = new Proveedor();
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(string id)
         {
-            Proveedor = await _almacen.ObtenerProveedor(id);
+            var lista = await _almacen.ListarProveedoresAsync();
+            Proveedor = lista.FirstOrDefault(p => p.CedulaJuridica == id);
 
             if (Proveedor == null)
                 return NotFound();
@@ -29,12 +30,17 @@ namespace WebProducto.Pages.Proveedores
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var resp = await _almacen.InactivarProveedor(Proveedor.CedulaJuridica);
+            var resultado = await _almacen.InactivarProveedorAsync(Proveedor.CedulaJuridica);
 
-            if (resp.Exito)
-                return RedirectToPage("./Index");
+            if (resultado != null && resultado.ResultadoOperacion)
+            {
+                TempData["Mensaje"] = "¡Modificación finalizada de forma exitosa!";
+                return RedirectToPage("Index");
+            }
 
-            ModelState.AddModelError("", resp.Mensaje);
+            ModelState.AddModelError(string.Empty,
+                "Error al realizar el proceso: " + (resultado?.Mensaje ?? "Error desconocido"));
+
             return Page();
         }
     }

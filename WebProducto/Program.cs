@@ -4,10 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 
-// HttpClient para consumir WS
-builder.Services.AddHttpClient();
-
-// Registrar servicios
+// Inyección de dependencias
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IAlmacenService, AlmacenService>();
 

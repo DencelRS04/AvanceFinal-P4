@@ -1,40 +1,49 @@
-﻿using Biblioteca.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ServiceReferenceAlmacen;
 using WebProducto.Services;
+using System.Threading.Tasks;
 
 namespace WebProducto.Pages.Proveedores
 {
     public class EditModel : PageModel
     {
-        private readonly IAlmacenService _almacen;
+        private readonly IAlmacenService _almacenService;
 
-        public EditModel(IAlmacenService almacen)
+        public EditModel(IAlmacenService almacenService)
         {
-            _almacen = almacen;
+            _almacenService = almacenService;
         }
 
         [BindProperty]
-        public ProveedorDTO Proveedor { get; set; }
+        public Proveedor Proveedor { get; set; } = new Proveedor();
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public void OnGet(string cedula, string empresa, string contacto, string telefono, string correo, string estado)
         {
-            Proveedor = await _almacen.ObtenerProveedor(id);
-
-            if (Proveedor == null)
-                return NotFound();
-
-            return Page();
+            Proveedor.CedulaJuridica = cedula;
+            Proveedor.NombreEmpresa = empresa;
+            Proveedor.NombreContacto = contacto;
+            Proveedor.Telefono = telefono;
+            Proveedor.Correo = correo;
+            Proveedor.Estado = estado;
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var resp = await _almacen.ModificarProveedor(Proveedor);
+            if (!ModelState.IsValid)
+                return Page();
 
-            if (resp.Exito)
-                return RedirectToPage("./Index");
+            Proveedor.TipoTransaccion = "M"; // Modificar
 
-            ModelState.AddModelError("", resp.Mensaje);
+            var resultado = await _almacenService.ProcesarProveedorAsync(Proveedor);
+
+            if (resultado != null && resultado.ResultadoOperacion)
+            {
+                TempData["Mensaje"] = "¡Modificación finalizada de forma exitosa!";
+                return RedirectToPage("Index");
+            }
+
+            ModelState.AddModelError(string.Empty, "Error al realizar el proceso: " + resultado?.Mensaje);
             return Page();
         }
     }

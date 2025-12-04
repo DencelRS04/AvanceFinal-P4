@@ -1,6 +1,6 @@
-﻿using Biblioteca.Models;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebProducto.Services;
+using ServiceReferenceAlmacen;
 
 namespace WebProducto.Pages.Productos
 {
@@ -13,11 +13,11 @@ namespace WebProducto.Pages.Productos
             _almacen = almacen;
         }
 
-        public List<ProductoDTO> Productos { get; set; }
+        public List<Producto> Productos { get; set; } = new();
 
         public async Task OnGetAsync()
         {
-            Productos = await _almacen.ObtenerProductos();
+            Productos = await _almacen.ListarProductosAsync();
         }
     }
 }

@@ -1,0 +1,38 @@
+﻿@page
+@model WebProducto.Pages.Account.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Login Administrativo - Nova Online</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body style="background:#f2f4f8;">
+    <div class="main-container" style="max-width:400px; margin-top:100px;">
+        <h2>Ingreso Administrativo</h2>
+
+        <form method="post">
+            <label>Usuario</label>
+            <input asp-for="Usuario" class="form-control" />
+            <span asp-validation-for="Usuario" class="text-danger"></span>
+
+            <label>Contraseña</label>
+            <input asp-for="Contraseña" type="password" class="form-control" />
+            <span asp-validation-for="Contraseña" class="text-danger"></span>
+
+            <button type="submit" class="btn btn-primary" style="margin-top:15px; width:100%;">
+                Ingresar
+            </button>
+
+            @if (!string.IsNullOrEmpty(Model.ErrorMensaje))
+            {
+                <p class="text-danger">@Model.ErrorMensaje</p>
+            }
+        </form>
+    </div>
+</body>
+</html>

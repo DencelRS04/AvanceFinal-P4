@@ -1,6 +1,6 @@
-﻿using Biblioteca.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using ServiceReferenceAlmacen;
 using WebProducto.Services;
 
 namespace WebProducto.Pages.Proveedores
@@ -14,27 +14,29 @@ namespace WebProducto.Pages.Proveedores
             _almacen = almacen;
         }
 
-        public List<ProveedorDTO> Proveedores { get; set; }
-
         [BindProperty(SupportsGet = true)]
         public string Filtro { get; set; }
 
+        public List<Proveedor> ListaProveedores { get; set; } = new();
+
         public async Task OnGetAsync()
         {
-            var lista = await _almacen.ObtenerProveedores();
-
-            if (!string.IsNullOrWhiteSpace(Filtro))
+            // WS NO TIENE GET → creamos transacción CONSULTAR
+            var consulta = new Proveedor
             {
-                lista = lista.Where(p =>
-                    (p.CedulaJuridica ?? "").Contains(Filtro, StringComparison.OrdinalIgnoreCase) ||
-                    (p.Empresa ?? "").Contains(Filtro, StringComparison.OrdinalIgnoreCase) ||
-                    (p.Contacto ?? "").Contains(Filtro, StringComparison.OrdinalIgnoreCase) ||
-                    (p.Telefono ?? "").Contains(Filtro, StringComparison.OrdinalIgnoreCase) ||
-                    (p.Estado ?? "").Contains(Filtro, StringComparison.OrdinalIgnoreCase)
-                ).ToList();
+                TipoTransaccion = "CONSULTAR"
+            };
+
+            var resultado = await _almacen.ProcesarProveedorAsync(consulta);
+
+            if (resultado == null || !resultado.ResultadoOperacion)
+            {
+                ListaProveedores = new List<Proveedor>();
+                return;
             }
 
-            Proveedores = lista;
+            // Si tu WS retorna proveedores en otra estructura, ajustamos después
+            // Aquí asumimos que devuelve ListaUsuarios o similar
         }
     }
 }

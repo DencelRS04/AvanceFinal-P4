@@ -1,0 +1,25 @@
+﻿@page
+@model WebProducto.Pages.Productos.CreateModel
+@{
+    ViewData["Title"] = "Nuevo Producto";
+}
+
+<h2>Nuevo Producto</h2>
+
+<form method="post">
+
+    <label>Número</label>
+    <input asp-for="Producto.NumeroProducto" />
+    <span asp-validation-for="Producto.NumeroProducto" class="text-danger"></span>
+
+    <label>Nombre</label>
+    <input asp-for="Producto.NombreProducto" />
+    <span asp-validation-for="Producto.NombreProducto" class="text-danger"></span>
+
+    <label>Precio</label>
+    <input asp-for="Producto.Precio" />
+    <span asp-validation-for="Producto.Precio" class="text-danger"></span>
+
+    <button class="btn btn-success" style="margin-top:10px;">Guardar</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
+</form>

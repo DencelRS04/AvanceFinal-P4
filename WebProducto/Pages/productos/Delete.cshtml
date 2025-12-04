@@ -4,17 +4,17 @@
     ViewData["Title"] = "Eliminar Producto";
 }
 
-<h2 class="text-danger">Eliminar Producto</h2>
+<h2>Eliminar Producto</h2>
 
 <p>¿Está seguro que desea eliminar este producto?</p>
 
 <div>
-    <p><strong>Número:</strong> @Model.Producto.NumeroProducto</p>
-    <p><strong>Nombre:</strong> @Model.Producto.Nombre</p>
-    <p><strong>Precio:</strong> @Model.Producto.Precio</p>
+    <strong>Número:</strong> @Model.Producto.NumeroProducto <br />
+    <strong>Nombre:</strong> @Model.Producto.NombreProducto <br />
+    <strong>Precio:</strong> @Model.Producto.Precio
 </div>
 
-<form method="post">
+<form method="post" style="margin-top:20px;">
     <button class="btn btn-danger">Eliminar</button>
-    <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
+    <a asp-page="./Index" class="btn btn-secondary">Cancelar</a>
 </form>

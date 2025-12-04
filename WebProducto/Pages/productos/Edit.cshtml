@@ -8,16 +8,15 @@
 
 <form method="post">
 
-    <label>Número de Producto</label>
+    <label>Número</label>
     <input asp-for="Producto.NumeroProducto" readonly />
 
     <label>Nombre</label>
-    <input asp-for="Producto.Nombre" />
+    <input asp-for="Producto.NombreProducto" />
 
     <label>Precio</label>
     <input asp-for="Producto.Precio" />
 
-    <button class="btn btn-primary mt-3">Actualizar</button>
+    <button class="btn btn-primary" style="margin-top:10px;">Guardar cambios</button>
     <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
-
 </form>
