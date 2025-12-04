@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dence\\OneDrive\\Escritorio\\Rep-Final\\BibliotecaORM\\BibliotecaORM.csproj": {}
+    "C:\\Users\\XPC\\Desktop\\AvanceFinal-P4\\DencelRS04\\AvanceFinal-P4\\BibliotecaORM\\BibliotecaORM.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dence\\OneDrive\\Escritorio\\Rep-Final\\BibliotecaORM\\BibliotecaORM.csproj": {
+    "C:\\Users\\XPC\\Desktop\\AvanceFinal-P4\\DencelRS04\\AvanceFinal-P4\\BibliotecaORM\\BibliotecaORM.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dence\\OneDrive\\Escritorio\\Rep-Final\\BibliotecaORM\\BibliotecaORM.csproj",
+        "projectUniqueName": "C:\\Users\\XPC\\Desktop\\AvanceFinal-P4\\DencelRS04\\AvanceFinal-P4\\BibliotecaORM\\BibliotecaORM.csproj",
         "projectName": "BibliotecaORM",
-        "projectPath": "C:\\Users\\dence\\OneDrive\\Escritorio\\Rep-Final\\BibliotecaORM\\BibliotecaORM.csproj",
-        "packagesPath": "C:\\Users\\dence\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dence\\OneDrive\\Escritorio\\Rep-Final\\BibliotecaORM\\obj\\",
+        "projectPath": "C:\\Users\\XPC\\Desktop\\AvanceFinal-P4\\DencelRS04\\AvanceFinal-P4\\BibliotecaORM\\BibliotecaORM.csproj",
+        "packagesPath": "C:\\Users\\XPC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\XPC\\Desktop\\AvanceFinal-P4\\DencelRS04\\AvanceFinal-P4\\BibliotecaORM\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\dence\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\XPC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

@@ -35,3 +35,16 @@ C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\Bibl
 C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\refint\BibliotecaORM.dll
 C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.pdb
 C:\Users\dence\OneDrive\Escritorio\Rep-Final\BibliotecaORM\obj\Debug\net9.0\ref\BibliotecaORM.dll
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\bin\Debug\net9.0\BibliotecaORM.deps.json
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\bin\Debug\net9.0\BibliotecaORM.dll
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\bin\Debug\net9.0\BibliotecaORM.pdb
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.csproj.AssemblyReference.cache
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.AssemblyInfoInputs.cache
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.AssemblyInfo.cs
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.csproj.CoreCompileInputs.cache
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.sourcelink.json
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.dll
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\obj\Debug\net9.0\refint\BibliotecaORM.dll
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\obj\Debug\net9.0\BibliotecaORM.pdb
+C:\Users\XPC\Desktop\AvanceFinal-P4\DencelRS04\AvanceFinal-P4\BibliotecaORM\obj\Debug\net9.0\ref\BibliotecaORM.dll
