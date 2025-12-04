@@ -1,28 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Biblioteca.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using BibliotecaORM.Model;
+using WebProducto.Services;
 
-namespace WebProducto.Pages.productos
+namespace WebProducto.Pages.Productos
 {
     public class IndexModel : PageModel
     {
-        private readonly BibliotecaORM.Model.Ambiente _context;
+        private readonly IAlmacenService _almacen;
 
-        public IndexModel(BibliotecaORM.Model.Ambiente context)
+        public IndexModel(IAlmacenService almacen)
         {
-            _context = context;
+            _almacen = almacen;
         }
 
-        public IList<Producto> Producto { get;set; } = default!;
+        public List<ProductoDTO> Productos { get; set; }
 
         public async Task OnGetAsync()
         {
-            Producto = await _context.Producto.ToListAsync();
+            Productos = await _almacen.ObtenerProductos();
         }
     }
 }

@@ -1,42 +1,38 @@
 ﻿@page
-@model WebProducto.Pages.productos.IndexModel
-
+@model WebProducto.Pages.Productos.IndexModel
 @{
-    ViewData["Title"] = "Indice";
+    ViewData["Title"] = "Productos";
 }
 
-<h1>Indice</h1>
+<h2>Productos</h2>
 
 <p>
-    <a asp-page="Create">Crear nuevo</a>
+    <a class="btn btn-success" asp-page="Create">➕ Nuevo Producto</a>
 </p>
-<table class="table">
+
+<table>
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Producto[0].Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Producto[0].Precio)
-            </th>
-            <th></th>
+            <th>Número</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th style="width:200px;">Acciones</th>
         </tr>
     </thead>
+
     <tbody>
-@foreach (var item in Model.Producto) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.IDProducto">Editar</a> |
-                <a asp-page="./Details" asp-route-id="@item.IDProducto">Detalles</a> |
-                <a asp-page="./Delete" asp-route-id="@item.IDProducto">Borrar</a>
-            </td>
-        </tr>
-}
+        @foreach (var p in Model.Productos)
+        {
+            <tr>
+                <td>@p.NumeroProducto</td>
+                <td>@p.Nombre</td>
+                <td>@p.Precio</td>
+
+                <td>
+                    <a class="btn btn-warning btn-sm" asp-page="Edit" asp-route-id="@p.NumeroProducto">Editar</a>
+                    <a class="btn btn-danger btn-sm" asp-page="Delete" asp-route-id="@p.NumeroProducto">Eliminar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

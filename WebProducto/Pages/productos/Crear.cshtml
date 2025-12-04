@@ -1,39 +1,23 @@
 ﻿@page
-@model WebProducto.Pages.productos.CreateModel
-
-        @{
-        ViewData["Title"] = "Crear";
-        }
-        
-        <h1>Crear</h1>
-        
-    <h4>Producto</h4>
-    <hr />
-    <div class="row">
-    <div class="col-md-4">
-    <form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Producto.Nombre" class="control-label"></label>
-                <input asp-for="Producto.Nombre" class="form-control" />
-                <span asp-validation-for="Producto.Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Producto.Precio" class="control-label"></label>
-                <input asp-for="Producto.Precio" class="form-control" />
-                <span asp-validation-for="Producto.Precio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Crear" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-page="Indice">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@model WebProducto.Pages.Productos.CrearModel
+@{
+    ViewData["Title"] = "Nuevo Producto";
 }
+
+<h2>Registrar Nuevo Producto</h2>
+
+<form method="post">
+
+    <label>Número de Producto</label>
+    <input asp-for="Producto.NumeroProducto" />
+
+    <label>Nombre</label>
+    <input asp-for="Producto.Nombre" />
+
+    <label>Precio</label>
+    <input asp-for="Producto.Precio" />
+
+    <button class="btn btn-success mt-3">Guardar</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
+
+</form>

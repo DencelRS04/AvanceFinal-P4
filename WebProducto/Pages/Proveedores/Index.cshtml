@@ -1,0 +1,51 @@
+﻿@page
+@model WebProducto.Pages.Proveedores.IndexModel
+@{
+    ViewData["Title"] = "Proveedores";
+}
+
+<h2>Proveedores</h2>
+
+<form method="get" style="margin-bottom:20px;">
+    <input type="text" name="Filtro" placeholder="Buscar..." value="@Model.Filtro" style="width:300px;" />
+    <button class="btn btn-primary">Buscar</button>
+</form>
+
+<p>
+    <a class="btn btn-success" asp-page="Create">➕ Nuevo Proveedor</a>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Cédula Jurídica</th>
+            <th>Empresa</th>
+            <th>Contacto</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+            <th style="width:220px;">Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var p in Model.Proveedores)
+        {
+            <tr>
+                <td>@p.CedulaJuridica</td>
+                <td>@p.Empresa</td>
+                <td>@p.Contacto</td>
+                <td>@p.Telefono</td>
+                <td>@p.Estado</td>
+
+                <td>
+                    <a class="btn btn-warning btn-sm" asp-page="Edit" asp-route-id="@p.CedulaJuridica">Editar</a>
+
+                    @if (p.Estado == "Activo")
+                    {
+                        <a class="btn btn-danger btn-sm" asp-page="Inactivar" asp-route-id="@p.CedulaJuridica">Inactivar</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

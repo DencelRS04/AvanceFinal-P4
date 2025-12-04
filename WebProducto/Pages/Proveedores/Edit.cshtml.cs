@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Biblioteca.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Biblioteca.Models;
 using WebProducto.Services;
 
-namespace WebProducto.Pages.Productos
+namespace WebProducto.Pages.Proveedores
 {
     public class EditModel : PageModel
     {
@@ -15,13 +15,13 @@ namespace WebProducto.Pages.Productos
         }
 
         [BindProperty]
-        public ProductoDTO Producto { get; set; }
+        public ProveedorDTO Proveedor { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            Producto = await _almacen.ObtenerProducto(id);
+            Proveedor = await _almacen.ObtenerProveedor(id);
 
-            if (Producto == null)
+            if (Proveedor == null)
                 return NotFound();
 
             return Page();
@@ -29,7 +29,7 @@ namespace WebProducto.Pages.Productos
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var resp = await _almacen.ModificarProducto(Producto);
+            var resp = await _almacen.ModificarProveedor(Proveedor);
 
             if (resp.Exito)
                 return RedirectToPage("./Index");

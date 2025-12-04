@@ -1,9 +1,9 @@
-﻿using BibliotecaORM.Model;
+﻿using Biblioteca.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebProducto.Services;
 
-namespace WebProducto.Pages.Productos
+namespace WebProducto.Pages.Proveedores
 {
     public class CrearModel : PageModel
     {
@@ -15,13 +15,15 @@ namespace WebProducto.Pages.Productos
         }
 
         [BindProperty]
-        public ProductoDTO Producto { get; set; }
+        public ProveedorDTO Proveedor { get; set; }
 
         public void OnGet() { }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var resp = await _almacen.GuardarProducto(Producto);
+            Proveedor.Estado = "Activo";
+
+            var resp = await _almacen.GuardarProveedor(Proveedor);
 
             if (resp.Exito)
                 return RedirectToPage("./Index");

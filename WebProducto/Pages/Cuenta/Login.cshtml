@@ -1,0 +1,28 @@
+﻿@page
+@model WebProducto.Pages.Account.LoginModel
+@{
+    Layout = null;
+}
+
+<div class="main-container" style="max-width:450px; margin-top:100px;">
+    <h2>Ingreso Administrativo</h2>
+
+    <form method="post">
+
+        <label>Usuario</label>
+        <input asp-for="Credenciales.Usuario" />
+
+        <label>Contraseña</label>
+        <input asp-for="Credenciales.Clave" type="password" />
+
+        <button class="btn btn-primary" style="margin-top:15px; width:100%;">
+            Ingresar
+        </button>
+
+        @if (!string.IsNullOrEmpty(Model.Error))
+        {
+            <p class="text-danger">@Model.Error</p>
+        }
+
+    </form>
+</div>
