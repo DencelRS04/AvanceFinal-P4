@@ -1,22 +1,38 @@
-﻿@page
+﻿@page "{numero}"
 @model WebProducto.Pages.Productos.EditModel
 @{
-    ViewData["Title"] = "Editar Producto";
+    ViewData["Title"] = "Modificar Producto";
+    Layout = "_Layout";
 }
 
-<h2>Editar Producto</h2>
+<h2>Modificar Producto</h2>
 
 <form method="post">
+    @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@error.ErrorMessage</div>
+            }
+        </div>
+    }
 
-    <label>Número</label>
-    <input asp-for="Producto.NumeroProducto" readonly />
+    <div class="mb-3">
+        <label>Código del producto</label>
+        <input asp-for="Prod.NumeroProducto" class="form-control" readonly />
+    </div>
 
-    <label>Nombre</label>
-    <input asp-for="Producto.NombreProducto" />
+    <div class="mb-3">
+        <label>Nombre del producto</label>
+        <input asp-for="Prod.NombreProducto" class="form-control" />
+    </div>
 
-    <label>Precio</label>
-    <input asp-for="Producto.Precio" />
+    <div class="mb-3">
+        <label>Precio</label>
+        <input asp-for="Prod.Precio" class="form-control" />
+    </div>
 
-    <button class="btn btn-primary" style="margin-top:10px;">Guardar cambios</button>
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
     <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
 </form>

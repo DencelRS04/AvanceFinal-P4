@@ -1,37 +1,53 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebProducto.Services;
+using ServiceReferenceAuth;
 
 namespace WebProducto.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly IAuthService _auth;
+        private readonly IAutenticacionService _auth;
 
-        public LoginModel(IAuthService auth)
+        [BindProperty]
+        public string Usuario { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string Contrasenia { get; set; } = string.Empty;
+
+        public string ErrorMensaje { get; set; } = string.Empty;
+
+        public LoginModel(IAutenticacionService auth)
         {
             _auth = auth;
         }
 
-        [BindProperty]
-        public string Usuario { get; set; }
-
-        [BindProperty]
-        public string Contrasenia { get; set; }
-
-        public string ErrorMensaje { get; set; }
-
-        public async Task<IActionResult> OnPost()
+        public void OnGet()
         {
-            var resp = await _auth.Login(Usuario, Contrasenia, 1);
+        }
 
-            if (!resp.Resultado)
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (string.IsNullOrWhiteSpace(Usuario) ||
+                string.IsNullOrWhiteSpace(Contrasenia))
             {
-                ErrorMensaje = resp.Mensaje;
+                ErrorMensaje = "Debe digitar usuario y contraseña.";
                 return Page();
             }
 
-            return RedirectToPage("/Shared/Index");
+            // MÉTODO REAL DEL WS
+            var resp = await _auth.AutenticarAdminAsync(Usuario, Contrasenia);
+
+            if (resp == null || !resp.Resultado || resp.Usuario == null)
+            {
+                ErrorMensaje = "Usuario y/o contraseña incorrectos";
+                return Page();
+            }
+
+            TempData["UsuarioLogueado"] =
+                resp.Usuario.Nombre + " " + resp.Usuario.PrimerApellido;
+
+            return RedirectToPage("/ADM/Menu");
         }
     }
 }

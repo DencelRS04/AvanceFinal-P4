@@ -2,13 +2,18 @@
 @model WebProducto.Pages.Proveedores.IndexModel
 @{
     ViewData["Title"] = "Proveedores";
+    Layout = "_Layout";
 }
 
 <h2>Mantenimiento de Proveedores</h2>
 
-<form method="get" style="margin-bottom:15px;">
-    <input type="text" name="Filtro" value="@Model.Filtro" placeholder="Filtrar..." />
-    <button class="btn btn-primary">Buscar</button>
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-4">
+        <input type="text" name="Filtro" value="@Model.Filtro" class="form-control" placeholder="Filtrar por cualquier dato..." />
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary w-100">Buscar</button>
+    </div>
 </form>
 
 <p>
@@ -18,33 +23,36 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Cédula Jurídica</th>
-            <th>Empresa</th>
-            <th>Contacto</th>
+            <th>Cédula jurídica</th>
+            <th>Nombre de la empresa</th>
+            <th>Nombre del contacto</th>
             <th>Teléfono</th>
             <th>Estado</th>
-            <th>Acciones</th>
+            <th></th>
         </tr>
     </thead>
-
     <tbody>
-        @foreach (var p in Model.ListaProveedores)
+        @if (Model.ListaProveedores != null && Model.ListaProveedores.Count > 0)
+        {
+            foreach (var p in Model.ListaProveedores)
+            {
+                <tr>
+                    <td>@p.CedulaJuridica</td>
+                    <td>@p.NombreEmpresa</td>
+                    <td>@p.NombreContacto</td>
+                    <td>@p.Telefono</td>
+                    <td>@p.Estado</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" asp-page="Edit" asp-route-cedula="@p.CedulaJuridica">Modificar</a>
+                        <a class="btn btn-sm btn-warning" asp-page="Inactivar" asp-route-cedula="@p.CedulaJuridica">Inactivar</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
         {
             <tr>
-                <td>@p.CedulaJuridica</td>
-                <td>@p.NombreEmpresa</td>
-                <td>@p.NombreContacto</td>
-                <td>@p.Telefono</td>
-                <td>@p.Estado</td>
-                <td>
-                    <a class="btn btn-warning btn-sm"
-                       asp-page="Edit"
-                       asp-route-cedula="@p.CedulaJuridica">Editar</a>
-
-                    <a class="btn btn-danger btn-sm"
-                       asp-page="Inactivar"
-                       asp-route-cedula="@p.CedulaJuridica">Inactivar</a>
-                </td>
+                <td colspan="6" class="text-center">No hay proveedores para mostrar.</td>
             </tr>
         }
     </tbody>

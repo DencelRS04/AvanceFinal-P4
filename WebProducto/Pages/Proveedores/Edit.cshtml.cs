@@ -1,50 +1,56 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ServiceReferenceAlmacen;
-using WebProducto.Services;
 using System.Threading.Tasks;
+using WebProducto.Services;
 
 namespace WebProducto.Pages.Proveedores
 {
     public class EditModel : PageModel
     {
-        private readonly IAlmacenService _almacenService;
+        private readonly IAlmacenService _almacen;
 
-        public EditModel(IAlmacenService almacenService)
+        public EditModel(IAlmacenService almacen)
         {
-            _almacenService = almacenService;
+            _almacen = almacen;
         }
 
         [BindProperty]
-        public Proveedor Proveedor { get; set; } = new Proveedor();
+        public Proveedor Prov { get; set; } = new Proveedor();
 
-        public void OnGet(string cedula, string empresa, string contacto, string telefono, string correo, string estado)
+        public IActionResult OnGet(string cedula)
         {
-            Proveedor.CedulaJuridica = cedula;
-            Proveedor.NombreEmpresa = empresa;
-            Proveedor.NombreContacto = contacto;
-            Proveedor.Telefono = telefono;
-            Proveedor.Correo = correo;
-            Proveedor.Estado = estado;
+            // Aquí deberías cargar el proveedor real.
+            // Simulación: rellenar solo la cédula.
+            Prov.CedulaJuridica = cedula;
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-                return Page();
-
-            Proveedor.TipoTransaccion = "M"; // Modificar
-
-            var resultado = await _almacenService.ProcesarProveedorAsync(Proveedor);
-
-            if (resultado != null && resultado.ResultadoOperacion)
+            if (string.IsNullOrWhiteSpace(Prov.CedulaJuridica) ||
+                string.IsNullOrWhiteSpace(Prov.NombreEmpresa) ||
+                string.IsNullOrWhiteSpace(Prov.NombreContacto) ||
+                string.IsNullOrWhiteSpace(Prov.Telefono) ||
+                string.IsNullOrWhiteSpace(Prov.Correo))
             {
-                TempData["Mensaje"] = "¡Modificación finalizada de forma exitosa!";
-                return RedirectToPage("Index");
+                ModelState.AddModelError("", "Todos los campos son obligatorios.");
+                return Page();
             }
 
-            ModelState.AddModelError(string.Empty, "Error al realizar el proceso: " + resultado?.Mensaje);
-            return Page();
+            Prov.TipoTransaccion = "4"; // actualizar
+
+            var resp = await _almacen.ProcesarProveedorAsync(Prov);
+
+            if (!resp.ResultadoOperacion)
+            {
+                ModelState.AddModelError("", "Error al realizar el proceso: " + resp.Mensaje);
+                return Page();
+            }
+
+            TempData["MensajeExitoProveedores"] = "¡Modificación finalizada de forma exitosa!";
+
+            return RedirectToPage("Index");
         }
     }
 }

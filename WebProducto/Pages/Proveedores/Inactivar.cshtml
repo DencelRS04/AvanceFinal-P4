@@ -1,47 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using ServiceReferenceAlmacen;
-using WebProducto.Services;
-
-namespace WebProducto.Pages.Productos
-{
-    public class DeleteModel : PageModel
-    {
-        private readonly IAlmacenService _almacen;
-
-        public DeleteModel(IAlmacenService almacen)
-        {
-            _almacen = almacen;
-        }
-
-        // NO EXISTE ProductoDTO → se usa el del WS
-        [BindProperty]
-        public Producto Producto { get; set; } = new Producto();
-
-        public IActionResult OnGet(string numero, string nombre, decimal precio)
-        {
-            // Recibimos los datos desde la URL porque el WS NO TIENE CONSULTAS
-            Producto.NumeroProducto = numero;
-            Producto.NombreProducto = nombre;
-            Producto.Precio = precio;
-
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-            // El WS no tiene delete, así que enviamos una transacción especial
-            Producto.TipoTransaccion = "ELIMINAR";
-
-            var resultado = await _almacen.ProcesarProducto(Producto);
-
-            if (!resultado.ResultadoOperacion)
-            {
-                ModelState.AddModelError("", "Error: " + resultado.Mensaje);
-                return Page();
-            }
-
-            return RedirectToPage("./Index");
-        }
-    }
+﻿@page "{cedula}"
+@model WebProducto.Pages.Proveedores.InactivarModel
+@{
+    ViewData["Title"] = "Inactivar Proveedor";
+    Layout = "_Layout";
 }
+
+<h2>Inactivar Proveedor</h2>
+
+<p>¿Está seguro de inactivar el proveedor?</p>
+
+<form method="post">
+    <div class="mb-3">
+        <label>Cédula jurídica</label>
+        <input asp-for="Prov.CedulaJuridica" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label>Estado</label>
+        <input asp-for="Prov.Estado" class="form-control" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-warning">Sí, inactivar</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
+</form>

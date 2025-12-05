@@ -1,42 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ServiceReferenceAlmacen;
-using WebProducto.Services;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WebProducto.Pages.Proveedores
 {
     public class IndexModel : PageModel
     {
-        private readonly IAlmacenService _almacen;
-
-        public IndexModel(IAlmacenService almacen)
-        {
-            _almacen = almacen;
-        }
+        public List<Proveedor> ListaProveedores { get; set; } = new();
 
         [BindProperty(SupportsGet = true)]
         public string Filtro { get; set; }
 
-        public List<Proveedor> ListaProveedores { get; set; } = new();
-
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            // WS NO TIENE GET → creamos transacción CONSULTAR
-            var consulta = new Proveedor
+            // SIMULACIÓN de proveedores
+            ListaProveedores = new List<Proveedor>
             {
-                TipoTransaccion = "CONSULTAR"
+                new Proveedor { CedulaJuridica = "3010101010", NombreEmpresa = "Tech Solutions", NombreContacto="Carlos Pérez", Telefono="8888-8888", Correo="info@tech.com", Estado="Activo" },
+                new Proveedor { CedulaJuridica = "3020202020", NombreEmpresa = "Distribuidora Nova", NombreContacto="Ana López", Telefono="8999-9999", Correo="contacto@nova.com", Estado="Inactivo" }
             };
 
-            var resultado = await _almacen.ProcesarProveedorAsync(consulta);
-
-            if (resultado == null || !resultado.ResultadoOperacion)
+            if (!string.IsNullOrWhiteSpace(Filtro))
             {
-                ListaProveedores = new List<Proveedor>();
-                return;
+                var f = Filtro.ToLower();
+                ListaProveedores = ListaProveedores
+                    .Where(p =>
+                        (p.CedulaJuridica ?? "").ToLower().Contains(f) ||
+                        (p.NombreEmpresa ?? "").ToLower().Contains(f) ||
+                        (p.NombreContacto ?? "").ToLower().Contains(f) ||
+                        (p.Telefono ?? "").ToLower().Contains(f) ||
+                        (p.Correo ?? "").ToLower().Contains(f) ||
+                        (p.Estado ?? "").ToLower().Contains(f))
+                    .ToList();
             }
-
-            // Si tu WS retorna proveedores en otra estructura, ajustamos después
-            // Aquí asumimos que devuelve ListaUsuarios o similar
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WebProducto.Services;
 using ServiceReferenceAlmacen;
+using System.Threading.Tasks;
+using WebProducto.Services;
 
 namespace WebProducto.Pages.Proveedores
 {
@@ -15,32 +16,38 @@ namespace WebProducto.Pages.Proveedores
         }
 
         [BindProperty]
-        public Proveedor Proveedor { get; set; } = new Proveedor();
+        public Proveedor Prov { get; set; } = new Proveedor();
 
         public void OnGet()
         {
+            Prov.Estado = "Activo";
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-                return Page();
-
-            Proveedor.Estado = "Activo";
-            Proveedor.TipoTransaccion = "AGREGAR";
-
-            var resultado = await _almacen.ProcesarProveedorAsync(Proveedor);
-
-            if (resultado != null && resultado.ResultadoOperacion)
+            if (string.IsNullOrWhiteSpace(Prov.CedulaJuridica) ||
+                string.IsNullOrWhiteSpace(Prov.NombreEmpresa) ||
+                string.IsNullOrWhiteSpace(Prov.NombreContacto) ||
+                string.IsNullOrWhiteSpace(Prov.Telefono) ||
+                string.IsNullOrWhiteSpace(Prov.Correo))
             {
-                TempData["Mensaje"] = "¡Proceso finalizado de forma exitosa!";
-                return RedirectToPage("Index");
+                ModelState.AddModelError("", "Todos los campos son obligatorios.");
+                return Page();
             }
 
-            ModelState.AddModelError(string.Empty,
-                "Error al realizar el proceso: " + (resultado?.Mensaje ?? "Error desconocido"));
+            Prov.TipoTransaccion = "1"; // insertar
 
-            return Page();
+            var resp = await _almacen.ProcesarProveedorAsync(Prov);
+
+            if (!resp.ResultadoOperacion)
+            {
+                ModelState.AddModelError("", "Error al realizar el proceso: " + resp.Mensaje);
+                return Page();
+            }
+
+            TempData["MensajeExitoProveedores"] = "¡Proceso finalizado de forma exitosa!";
+
+            return RedirectToPage("Index");
         }
     }
 }

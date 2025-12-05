@@ -1,31 +1,69 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewData["Title"] - Nova Online</title>
-    <link rel="stylesheet" href="~/css/site.css" />
+    <title>@ViewData["Title"] - Nova Online - Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light border-bottom mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-page="/Index">
+                    <!-- Logo textual, puedes cambiar por imagen -->
+                    Nova Online - Admin
+                </a>
 
-    <header class="header">
-        <div class="header-left">
-            <img src="/img/logo.png" class="logo" alt="Logo" />
-            <h2>Nova Online - Sistema Administrativo</h2>
-        </div>
-        <nav class="menu">
-            <a href="/Productos">Productos</a>
-            <a href="/Proveedores">Proveedores</a>
-            <a href="/Account/Login">Salir</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Productos/Index">Productos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-page="/Proveedores/Index">Proveedores</a>
+                        </li>
+                    </ul>
+
+                    <span class="navbar-text me-3">
+                        @{
+                            var usuario = HttpContextAccessor.HttpContext.Session.GetString("UsuarioAdmin");
+                            if (!string.IsNullOrEmpty(usuario))
+                            {
+                                @:Usuario: @usuario
+                            }
+                            else
+                            {
+                                @:No autenticado
+                            }
+                        }
+                    </span>
+
+                    <a class="btn btn-outline-danger btn-sm" asp-page="/Index">Salir</a>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <main class="main-container">
-        @RenderBody()
-    </main>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
-    <footer class="footer">
-        ©2025 Nova Online — Contacto: info@nova.com — Tel: 8888-8888
+    <footer class="border-top footer text-muted mt-3">
+        <div class="container">
+            &copy; @DateTime.Now.Year - Nova Online - Contacto: soporte@novaonline.com
+        </div>
     </footer>
 
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

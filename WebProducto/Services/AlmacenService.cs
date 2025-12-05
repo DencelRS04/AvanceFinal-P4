@@ -1,5 +1,5 @@
-﻿using ServiceReferenceAlmacen;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using ServiceReferenceAlmacen;
 
 namespace WebProducto.Services
 {
@@ -7,24 +7,21 @@ namespace WebProducto.Services
     {
         private readonly ServiceClient _client;
 
-        public AlmacenService()
+        public AlmacenService(ServiceClient client)
         {
-            _client = new ServiceClient(ServiceClient.EndpointConfiguration.BasicHttpBinding_IService);
+            _client = client;
         }
 
-        public async Task<Resultado> ProcesarProducto(Producto p)
+        public Task<Resultado> ProcesarProductoAsync(Producto producto)
         {
-            return await _client.ProcesarProductoAsync(p);
+            // MÉTODO REAL DEL WS: ProcesarProductoAsync
+            return _client.ProcesarProductoAsync(producto);
         }
 
-        public async Task<Resultado> ProcesarProveedor(Proveedor p)
+        public Task<Resultado> ProcesarProveedorAsync(Proveedor proveedor)
         {
-            return await _client.ProcesarProveedorAsync(p);
-        }
-
-        public async Task<Resultado> ProcesarCompra(Compra c)
-        {
-            return await _client.ProcesarCompraAsync(c);
+            // MÉTODO REAL DEL WS: ProcesarProveedorAsync
+            return _client.ProcesarProveedorAsync(proveedor);
         }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WebProducto.Services;
 using ServiceReferenceAlmacen;
+using System.Threading.Tasks;
+using WebProducto.Services;
 
 namespace WebProducto.Pages.Productos
 {
@@ -15,7 +16,7 @@ namespace WebProducto.Pages.Productos
         }
 
         [BindProperty]
-        public Producto Producto { get; set; } = new Producto();
+        public Producto Prod { get; set; } = new Producto();
 
         public void OnGet()
         {
@@ -23,24 +24,32 @@ namespace WebProducto.Pages.Productos
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-                return Page();
-
-            // TipoTransaccion se usa en el WS para saber qué hacer
-            Producto.TipoTransaccion = "AGREGAR";
-
-            var resultado = await _almacen.ProcesarProductoAsync(Producto);
-
-            if (resultado != null && resultado.ResultadoOperacion)
+            if (string.IsNullOrWhiteSpace(Prod.NumeroProducto) ||
+                string.IsNullOrWhiteSpace(Prod.NombreProducto))
             {
-                TempData["Mensaje"] = "¡Proceso finalizado de forma exitosa!";
-                return RedirectToPage("Index");
+                ModelState.AddModelError("", "Debe indicar el código y nombre del producto.");
+                return Page();
             }
 
-            ModelState.AddModelError(string.Empty,
-                "Error al realizar el proceso: " + (resultado?.Mensaje ?? "Error desconocido"));
+            if (Prod.Precio <= 0)
+            {
+                ModelState.AddModelError("", "El precio debe ser mayor a cero.");
+                return Page();
+            }
 
-            return Page();
+            Prod.TipoTransaccion = "1"; // insertar
+
+            var resp = await _almacen.ProcesarProductoAsync(Prod);
+
+            if (!resp.ResultadoOperacion)
+            {
+                ModelState.AddModelError("", "Error al realizar el proceso: " + resp.Mensaje);
+                return Page();
+            }
+
+            TempData["MensajeExitoProductos"] = "¡Proceso finalizado de forma exitosa!";
+
+            return RedirectToPage("Index");
         }
     }
 }

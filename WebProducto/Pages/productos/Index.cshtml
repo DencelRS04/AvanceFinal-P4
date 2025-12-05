@@ -2,37 +2,52 @@
 @model WebProducto.Pages.Productos.IndexModel
 @{
     ViewData["Title"] = "Productos";
+    Layout = "_Layout";
 }
 
 <h2>Mantenimiento de Productos</h2>
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-4">
+        <input type="text" name="Filtro" value="@Model.Filtro" class="form-control" placeholder="Filtrar por código o nombre..." />
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary w-100">Buscar</button>
+    </div>
+</form>
 
 <p>
     <a class="btn btn-success" asp-page="Create">Nuevo Producto</a>
 </p>
 
-<table>
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>Número</th>
-            <th>Nombre</th>
+            <th>Código</th>
+            <th>Nombre del producto</th>
             <th>Precio</th>
-            <th>Acciones</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var p in Model.Productos)
+        @if (Model.ListaProductos != null && Model.ListaProductos.Count > 0)
+        {
+            foreach (var p in Model.ListaProductos)
+            {
+                <tr>
+                    <td>@p.NumeroProducto</td>
+                    <td>@p.NombreProducto</td>
+                    <td>@p.Precio</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" asp-page="Edit" asp-route-numero="@p.NumeroProducto">Modificar</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
         {
             <tr>
-                <td>@p.NumeroProducto</td>
-                <td>@p.NombreProducto</td>
-                <td>@p.Precio</td>
-                <td>
-                    <a class="btn btn-warning btn-sm"
-                       asp-page="Edit"
-                       asp-route-numero="@p.NumeroProducto"
-                       asp-route-nombre="@p.NombreProducto"
-                       asp-route-precio="@p.Precio">Editar</a>
-                </td>
+                <td colspan="4" class="text-center">No hay productos para mostrar.</td>
             </tr>
         }
     </tbody>

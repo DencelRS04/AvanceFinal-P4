@@ -2,27 +2,49 @@
 @model WebProducto.Pages.Proveedores.CreateModel
 @{
     ViewData["Title"] = "Nuevo Proveedor";
+    Layout = "_Layout";
 }
 
-<h2>Registrar Proveedor</h2>
+<h2>Nuevo Proveedor</h2>
 
 <form method="post">
+    @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@error.ErrorMessage</div>
+            }
+        </div>
+    }
 
-    <label>Cédula Jurídica</label>
-    <input asp-for="Proveedor.CedulaJuridica" />
+    <div class="mb-3">
+        <label>Cédula jurídica</label>
+        <input asp-for="Prov.CedulaJuridica" class="form-control" />
+    </div>
 
-    <label>Nombre de la Empresa</label>
-    <input asp-for="Proveedor.NombreEmpresa" />
+    <div class="mb-3">
+        <label>Nombre de la empresa</label>
+        <input asp-for="Prov.NombreEmpresa" class="form-control" />
+    </div>
 
-    <label>Nombre del Contacto</label>
-    <input asp-for="Proveedor.NombreContacto" />
+    <div class="mb-3">
+        <label>Nombre del contacto</label>
+        <input asp-for="Prov.NombreContacto" class="form-control" />
+    </div>
 
-    <label>Teléfono</label>
-    <input asp-for="Proveedor.Telefono" />
+    <div class="mb-3">
+        <label>Teléfono</label>
+        <input asp-for="Prov.Telefono" class="form-control" />
+    </div>
 
-    <label>Correo</label>
-    <input asp-for="Proveedor.Correo" />
+    <div class="mb-3">
+        <label>Correo electrónico</label>
+        <input asp-for="Prov.Correo" class="form-control" />
+    </div>
 
-    <button class="btn btn-success" style="margin-top:10px;">Guardar</button>
+    <input type="hidden" asp-for="Prov.Estado" />
+
+    <button type="submit" class="btn btn-success">Guardar</button>
     <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
 </form>

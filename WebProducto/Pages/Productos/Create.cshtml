@@ -2,24 +2,37 @@
 @model WebProducto.Pages.Productos.CreateModel
 @{
     ViewData["Title"] = "Nuevo Producto";
+    Layout = "_Layout";
 }
 
 <h2>Nuevo Producto</h2>
 
 <form method="post">
+    @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@error.ErrorMessage</div>
+            }
+        </div>
+    }
 
-    <label>Número</label>
-    <input asp-for="Producto.NumeroProducto" />
-    <span asp-validation-for="Producto.NumeroProducto" class="text-danger"></span>
+    <div class="mb-3">
+        <label>Código del producto</label>
+        <input asp-for="Prod.NumeroProducto" class="form-control" />
+    </div>
 
-    <label>Nombre</label>
-    <input asp-for="Producto.NombreProducto" />
-    <span asp-validation-for="Producto.NombreProducto" class="text-danger"></span>
+    <div class="mb-3">
+        <label>Nombre del producto</label>
+        <input asp-for="Prod.NombreProducto" class="form-control" />
+    </div>
 
-    <label>Precio</label>
-    <input asp-for="Producto.Precio" />
-    <span asp-validation-for="Producto.Precio" class="text-danger"></span>
+    <div class="mb-3">
+        <label>Precio</label>
+        <input asp-for="Prod.Precio" class="form-control" />
+    </div>
 
-    <button class="btn btn-success" style="margin-top:10px;">Guardar</button>
+    <button type="submit" class="btn btn-success">Guardar</button>
     <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
 </form>

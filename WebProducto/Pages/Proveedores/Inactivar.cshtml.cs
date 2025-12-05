@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using WebProducto.Services;
 using ServiceReferenceAlmacen;
+using System.Threading.Tasks;
+using WebProducto.Services;
 
 namespace WebProducto.Pages.Proveedores
 {
@@ -15,33 +16,30 @@ namespace WebProducto.Pages.Proveedores
         }
 
         [BindProperty]
-        public Proveedor Proveedor { get; set; } = new Proveedor();
+        public Proveedor Prov { get; set; } = new Proveedor();
 
-        public async Task<IActionResult> OnGetAsync(string id)
+        public IActionResult OnGet(string cedula)
         {
-            var lista = await _almacen.ListarProveedoresAsync();
-            Proveedor = lista.FirstOrDefault(p => p.CedulaJuridica == id);
-
-            if (Proveedor == null)
-                return NotFound();
-
+            Prov.CedulaJuridica = cedula;
+            Prov.Estado = "Inactivo";
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var resultado = await _almacen.InactivarProveedorAsync(Proveedor.CedulaJuridica);
+            Prov.TipoTransaccion = "4"; // actualizar / cambio de estado
 
-            if (resultado != null && resultado.ResultadoOperacion)
+            var resp = await _almacen.ProcesarProveedorAsync(Prov);
+
+            if (!resp.ResultadoOperacion)
             {
-                TempData["Mensaje"] = "¡Modificación finalizada de forma exitosa!";
-                return RedirectToPage("Index");
+                ModelState.AddModelError("", "Error al realizar el proceso: " + resp.Mensaje);
+                return Page();
             }
 
-            ModelState.AddModelError(string.Empty,
-                "Error al realizar el proceso: " + (resultado?.Mensaje ?? "Error desconocido"));
+            TempData["MensajeExitoProveedores"] = "¡Proceso finalizado de forma exitosa!";
 
-            return Page();
+            return RedirectToPage("Index");
         }
     }
 }
