@@ -33,7 +33,7 @@ namespace WebProducto.Pages.Proveedores
                 // Por ahora, solo establecemos la cédula
                 Prov.CedulaJuridica = cedula;
                 Prov.TipoTransaccion = "4"; // Para modificación
-                Prov.Estado = "Activo"; // Valor por defecto
+                Prov.Estado = "1"; // Valor por defecto
 
                 _logger.LogInformation($"Editando proveedor: {cedula}");
 

@@ -5,50 +5,239 @@
     Layout = "_Layout";
 }
 
-<h2>Mantenimiento de Productos</h2>
+<div class="container mt-4">
+    <h2 class="mb-4">
+        <i class="fas fa-box me-2"></i> Mantenimiento de Productos
+    </h2>
 
-<form method="get" class="row g-2 mb-3">
-    <div class="col-md-4">
-        <input type="text" name="Filtro" value="@Model.Filtro" class="form-control" placeholder="Filtrar por código o nombre..." />
+    <!-- Mensajes de éxito/error -->
+    @if (!string.IsNullOrEmpty(Model.MensajeExito))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i> @Model.MensajeExito
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.MensajeError))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i> @Model.MensajeError
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Barra de acciones y búsqueda -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <a asp-page="Create" class="btn btn-success">
+                        <i class="fas fa-plus me-2"></i> Nuevo Producto
+                    </a>
+                    <span class="ms-3 text-muted">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Total: <strong>@Model.Productos.Count</strong> productos
+                    </span>
+                </div>
+                <div class="col-md-6">
+                    <form method="get" class="d-flex">
+                        <div class="input-group">
+                            <input type="text" class="form-control"
+                                   asp-for="Filtro" placeholder="Buscar por código, nombre o precio...">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search me-2"></i> Buscar
+                            </button>
+                            @if (!string.IsNullOrEmpty(Model.Filtro))
+                            {
+                                <a asp-page="Index" class="btn btn-outline-secondary">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-2">
-        <button class="btn btn-primary w-100">Buscar</button>
-    </div>
-</form>
 
-<p>
-    <a class="btn btn-success" asp-page="Create">Nuevo Producto</a>
-</p>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Nombre del producto</th>
-            <th>Precio</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.ListaProductos != null && Model.ListaProductos.Count > 0)
-        {
-            foreach (var p in Model.ListaProductos)
+    <!-- Tabla de productos -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            @if (Model.Productos.Any())
             {
-                <tr>
-                    <td>@p.NumeroProducto</td>
-                    <td>@p.NombreProducto</td>
-                    <td>@p.Precio</td>
-                    <td>
-                        <a class="btn btn-sm btn-primary" asp-page="Edit" asp-route-numero="@p.NumeroProducto">Modificar</a>
-                    </td>
-                </tr>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th width="15%">
+                                    <i class="fas fa-barcode me-2"></i> Código
+                                </th>
+                                <th width="45%">
+                                    <i class="fas fa-cube me-2"></i> Nombre del Producto
+                                </th>
+                                <th width="20%">
+                                    <i class="fas fa-tag me-2"></i> Precio
+                                </th>
+                                <th width="20%" class="text-center">
+                                    <i class="fas fa-cogs me-2"></i> Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var producto in Model.Productos)
+                            {
+                                <tr>
+                                    <td>
+                                        <span class="badge bg-secondary">@producto.NumeroProducto</span>
+                                    </td>
+                                    <td>@producto.NombreProducto</td>
+                                    <td>
+                                        <span class="fw-bold text-success">@producto.Precio.ToString("C2")</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <a asp-page="Edit"
+                                               asp-route-numero="@producto.NumeroProducto"
+                                               class="btn btn-warning"
+                                               title="Editar producto">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </a>
+                                            <button type="button"
+                                                    class="btn btn-danger"
+                                                    onclick="confirmarEliminarProducto('@producto.NumeroProducto', '@producto.NombreProducto')"
+                                                    title="Eliminar producto">
+                                                <i class="fas fa-trash"></i> Eliminar
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" class="text-muted text-center small">
+                                    <i class="fas fa-database me-1"></i>
+                                    Mostrando @Model.Productos.Count productos
+                                    @if (!string.IsNullOrEmpty(Model.Filtro))
+                                    {
+                                        <span>(filtrados)</span>
+                                    }
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             }
+            else
+            {
+                <div class="text-center py-5">
+                    <div class="mb-4">
+                        <i class="fas fa-box-open fa-4x text-muted"></i>
+                    </div>
+                    <h4 class="text-muted mb-3">No se encontraron productos</h4>
+
+                    @if (!string.IsNullOrEmpty(Model.Filtro))
+                    {
+                        <p class="text-muted mb-4">
+                            No hay resultados para "<strong>@Model.Filtro</strong>"
+                        </p>
+                        <a asp-page="Index" class="btn btn-outline-primary">
+                            <i class="fas fa-times me-2"></i> Limpiar búsqueda
+                        </a>
+                    }
+                    else
+                    {
+                        <p class="text-muted mb-4">
+                            El catálogo de productos está vacío
+                        </p>
+                        <a asp-page="Create" class="btn btn-primary">
+                            <i class="fas fa-plus me-2"></i> Crear primer producto
+                        </a>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmarEliminarProducto(codigo, nombre) {
+            Swal.fire({
+                title: '¿Está seguro?',
+                html: `Se eliminará el producto:<br>
+                      <strong>${nombre}</strong><br>
+                      <small>Código: ${codigo}</small>`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Aquí llamarías a tu servicio para eliminar
+                    eliminarProducto(codigo);
+                }
+            });
         }
-        else
-        {
-            <tr>
-                <td colspan="4" class="text-center">No hay productos para mostrar.</td>
-            </tr>
+
+        function eliminarProducto(codigo) {
+            // TODO: Implementar llamada AJAX para eliminar
+            fetch(`/Productos/Delete?numero=${codigo}`, {
+                method: 'POST',
+                headers: {
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    Swal.fire({
+                        title: '¡Eliminado!',
+                        text: 'El producto ha sido eliminado.',
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'No se pudo eliminar el producto.',
+                        icon: 'error'
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Error de conexión: ' + error.message,
+                    icon: 'error'
+                });
+            });
         }
-    </tbody>
-</table>
+
+        // Auto-close alerts after 5 seconds
+        setTimeout(() => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
+
+        // Focus on search input if filter exists
+        document.addEventListener('DOMContentLoaded', function() {
+            const filtroInput = document.querySelector('input[asp-for="Filtro"]');
+            if (filtroInput && '@Model.Filtro' !== '') {
+                filtroInput.focus();
+                filtroInput.select();
+            }
+        });
+    </script>
+
+    <!-- SweetAlert2 for better alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+}

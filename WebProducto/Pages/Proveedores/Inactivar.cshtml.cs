@@ -21,7 +21,7 @@ namespace WebProducto.Pages.Proveedores
         public IActionResult OnGet(string cedula)
         {
             Prov.CedulaJuridica = cedula;
-            Prov.Estado = "Inactivo";
+            Prov.Estado = "2";
             return Page();
         }
 

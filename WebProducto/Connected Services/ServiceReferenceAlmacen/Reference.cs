@@ -85,9 +85,24 @@ namespace ServiceReferenceAlmacen
     public partial class Resultado : object
     {
         
+        private string DetalleField;
+        
         private string MensajeField;
         
         private bool ResultadoOperacionField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Detalle
+        {
+            get
+            {
+                return this.DetalleField;
+            }
+            set
+            {
+                this.DetalleField = value;
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Mensaje
@@ -345,6 +360,12 @@ namespace ServiceReferenceAlmacen
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ProcesarCompra", ReplyAction="http://tempuri.org/IService/ProcesarCompraResponse")]
         System.Threading.Tasks.Task<ServiceReferenceAlmacen.Resultado> ProcesarCompraAsync(ServiceReferenceAlmacen.Compra compra);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerProductos", ReplyAction="http://tempuri.org/IService/ObtenerProductosResponse")]
+        System.Threading.Tasks.Task<ServiceReferenceAlmacen.Producto[]> ObtenerProductosAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/ObtenerProveedores", ReplyAction="http://tempuri.org/IService/ObtenerProveedoresResponse")]
+        System.Threading.Tasks.Task<ServiceReferenceAlmacen.Proveedor[]> ObtenerProveedoresAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
@@ -410,6 +431,16 @@ namespace ServiceReferenceAlmacen
         public System.Threading.Tasks.Task<ServiceReferenceAlmacen.Resultado> ProcesarCompraAsync(ServiceReferenceAlmacen.Compra compra)
         {
             return base.Channel.ProcesarCompraAsync(compra);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReferenceAlmacen.Producto[]> ObtenerProductosAsync()
+        {
+            return base.Channel.ObtenerProductosAsync();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReferenceAlmacen.Proveedor[]> ObtenerProveedoresAsync()
+        {
+            return base.Channel.ObtenerProveedoresAsync();
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

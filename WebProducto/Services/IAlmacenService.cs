@@ -1,5 +1,6 @@
-﻿using System.Threading.Tasks;
-using ServiceReferenceAlmacen;
+﻿using ServiceReferenceAlmacen;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace WebProducto.Services
 {
@@ -10,5 +11,12 @@ namespace WebProducto.Services
 
         // ADM3 – Proveedores
         Task<Resultado> ProcesarProveedorAsync(Proveedor proveedor);
+
+        // ADM4 – Compras
+        Task<Resultado> ProcesarCompraAsync(Compra compra);
+
+        // Métodos de consulta
+        Task<List<Producto>> ObtenerProductosAsync();
+        Task<List<Proveedor>> ObtenerProveedoresAsync();
     }
 }

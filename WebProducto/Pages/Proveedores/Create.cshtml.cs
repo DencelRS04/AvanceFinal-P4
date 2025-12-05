@@ -64,7 +64,7 @@ namespace WebProducto.Pages.Proveedores
 
                 // CORRECCIÓN CRÍTICA: El TipoTransaccion debe ser "3" para crear proveedor
                 Prov.TipoTransaccion = "3";
-                Prov.Estado = "Activo"; // Por defecto activo
+                Prov.Estado = "1"; // Por defecto activo
 
                 _logger.LogInformation($"Datos proveedor: {Prov.CedulaJuridica}, {Prov.NombreEmpresa}, Tipo: {Prov.TipoTransaccion}");
 
