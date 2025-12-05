@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceReferenceAuth
+namespace ServiceReferenceAutenticacion
 {
     using System.Runtime.Serialization;
     
@@ -26,9 +26,9 @@ namespace ServiceReferenceAuth
         
         private string DetalleField;
         
-        private ServiceReferenceAuth.AutenticacionResponse.UsuarioDto UsuarioField;
+        private ServiceReferenceAutenticacion.AutenticacionResponse.UsuarioDto UsuarioField;
         
-        private ServiceReferenceAuth.AutenticacionResponse.UsuarioDto[] ListaUsuariosField;
+        private ServiceReferenceAutenticacion.AutenticacionResponse.UsuarioDto[] ListaUsuariosField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public bool Resultado
@@ -83,7 +83,7 @@ namespace ServiceReferenceAuth
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-        public ServiceReferenceAuth.AutenticacionResponse.UsuarioDto Usuario
+        public ServiceReferenceAutenticacion.AutenticacionResponse.UsuarioDto Usuario
         {
             get
             {
@@ -96,7 +96,7 @@ namespace ServiceReferenceAuth
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
-        public ServiceReferenceAuth.AutenticacionResponse.UsuarioDto[] ListaUsuarios
+        public ServiceReferenceAutenticacion.AutenticacionResponse.UsuarioDto[] ListaUsuarios
         {
             get
             {
@@ -237,37 +237,37 @@ namespace ServiceReferenceAuth
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceAuth.IAutenticacion")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReferenceAutenticacion.IAutenticacion")]
     public interface IAutenticacion
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutenticacion/AutenticarUsuario", ReplyAction="http://tempuri.org/IAutenticacion/AutenticarUsuarioResponse")]
-        System.Threading.Tasks.Task<ServiceReferenceAuth.AutenticacionResponse> AutenticarUsuarioAsync(string usuario, string contrasenia, int tipo);
+        System.Threading.Tasks.Task<ServiceReferenceAutenticacion.AutenticacionResponse> AutenticarUsuarioAsync(string usuario, string contrasenia, int tipo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutenticacion/CrearUsuario", ReplyAction="http://tempuri.org/IAutenticacion/CrearUsuarioResponse")]
-        System.Threading.Tasks.Task<ServiceReferenceAuth.AutenticacionResponse> CrearUsuarioAsync(string identificacion, string nombre, string primerApellido, string segundoApellido, string correo, string usuario, string contrasenia, string estado, int tipo);
+        System.Threading.Tasks.Task<ServiceReferenceAutenticacion.AutenticacionResponse> CrearUsuarioAsync(string identificacion, string nombre, string primerApellido, string segundoApellido, string correo, string usuario, string contrasenia, string estado, int tipo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutenticacion/ModificarUsuario", ReplyAction="http://tempuri.org/IAutenticacion/ModificarUsuarioResponse")]
-        System.Threading.Tasks.Task<ServiceReferenceAuth.AutenticacionResponse> ModificarUsuarioAsync(string usuario, string nombre, string primerApellido, string segundoApellido, string correo, string contrasenia);
+        System.Threading.Tasks.Task<ServiceReferenceAutenticacion.AutenticacionResponse> ModificarUsuarioAsync(string usuario, string nombre, string primerApellido, string segundoApellido, string correo, string contrasenia);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutenticacion/CambiarEstadoUsuario", ReplyAction="http://tempuri.org/IAutenticacion/CambiarEstadoUsuarioResponse")]
-        System.Threading.Tasks.Task<ServiceReferenceAuth.AutenticacionResponse> CambiarEstadoUsuarioAsync(string identificacion, string nuevoEstado);
+        System.Threading.Tasks.Task<ServiceReferenceAutenticacion.AutenticacionResponse> CambiarEstadoUsuarioAsync(string identificacion, string nuevoEstado);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutenticacion/EliminarUsuario", ReplyAction="http://tempuri.org/IAutenticacion/EliminarUsuarioResponse")]
-        System.Threading.Tasks.Task<ServiceReferenceAuth.AutenticacionResponse> EliminarUsuarioAsync(string usuario);
+        System.Threading.Tasks.Task<ServiceReferenceAutenticacion.AutenticacionResponse> EliminarUsuarioAsync(string usuario);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAutenticacion/ObtenerUsuarios", ReplyAction="http://tempuri.org/IAutenticacion/ObtenerUsuariosResponse")]
-        System.Threading.Tasks.Task<ServiceReferenceAuth.AutenticacionResponse> ObtenerUsuariosAsync();
+        System.Threading.Tasks.Task<ServiceReferenceAutenticacion.AutenticacionResponse> ObtenerUsuariosAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    public interface IAutenticacionChannel : ServiceReferenceAuth.IAutenticacion, System.ServiceModel.IClientChannel
+    public interface IAutenticacionChannel : ServiceReferenceAutenticacion.IAutenticacion, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "8.0.0")]
-    public partial class AutenticacionClient : System.ServiceModel.ClientBase<ServiceReferenceAuth.IAutenticacion>, ServiceReferenceAuth.IAutenticacion
+    public partial class AutenticacionClient : System.ServiceModel.ClientBase<ServiceReferenceAutenticacion.IAutenticacion>, ServiceReferenceAutenticacion.IAutenticacion
     {
         
         /// <summary>
@@ -310,32 +310,32 @@ namespace ServiceReferenceAuth
         {
         }
         
-        public System.Threading.Tasks.Task<ServiceReferenceAuth.AutenticacionResponse> AutenticarUsuarioAsync(string usuario, string contrasenia, int tipo)
+        public System.Threading.Tasks.Task<ServiceReferenceAutenticacion.AutenticacionResponse> AutenticarUsuarioAsync(string usuario, string contrasenia, int tipo)
         {
             return base.Channel.AutenticarUsuarioAsync(usuario, contrasenia, tipo);
         }
         
-        public System.Threading.Tasks.Task<ServiceReferenceAuth.AutenticacionResponse> CrearUsuarioAsync(string identificacion, string nombre, string primerApellido, string segundoApellido, string correo, string usuario, string contrasenia, string estado, int tipo)
+        public System.Threading.Tasks.Task<ServiceReferenceAutenticacion.AutenticacionResponse> CrearUsuarioAsync(string identificacion, string nombre, string primerApellido, string segundoApellido, string correo, string usuario, string contrasenia, string estado, int tipo)
         {
             return base.Channel.CrearUsuarioAsync(identificacion, nombre, primerApellido, segundoApellido, correo, usuario, contrasenia, estado, tipo);
         }
         
-        public System.Threading.Tasks.Task<ServiceReferenceAuth.AutenticacionResponse> ModificarUsuarioAsync(string usuario, string nombre, string primerApellido, string segundoApellido, string correo, string contrasenia)
+        public System.Threading.Tasks.Task<ServiceReferenceAutenticacion.AutenticacionResponse> ModificarUsuarioAsync(string usuario, string nombre, string primerApellido, string segundoApellido, string correo, string contrasenia)
         {
             return base.Channel.ModificarUsuarioAsync(usuario, nombre, primerApellido, segundoApellido, correo, contrasenia);
         }
         
-        public System.Threading.Tasks.Task<ServiceReferenceAuth.AutenticacionResponse> CambiarEstadoUsuarioAsync(string identificacion, string nuevoEstado)
+        public System.Threading.Tasks.Task<ServiceReferenceAutenticacion.AutenticacionResponse> CambiarEstadoUsuarioAsync(string identificacion, string nuevoEstado)
         {
             return base.Channel.CambiarEstadoUsuarioAsync(identificacion, nuevoEstado);
         }
         
-        public System.Threading.Tasks.Task<ServiceReferenceAuth.AutenticacionResponse> EliminarUsuarioAsync(string usuario)
+        public System.Threading.Tasks.Task<ServiceReferenceAutenticacion.AutenticacionResponse> EliminarUsuarioAsync(string usuario)
         {
             return base.Channel.EliminarUsuarioAsync(usuario);
         }
         
-        public System.Threading.Tasks.Task<ServiceReferenceAuth.AutenticacionResponse> ObtenerUsuariosAsync()
+        public System.Threading.Tasks.Task<ServiceReferenceAutenticacion.AutenticacionResponse> ObtenerUsuariosAsync()
         {
             return base.Channel.ObtenerUsuariosAsync();
         }

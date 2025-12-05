@@ -1,14 +1,14 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://localhost:55246/Service.svc?wsdl"
+      "http://localhost:53328/Autenticacion.svc?wsdl"
     ],
     "collectionTypes": [
       "System.Array",
       "System.Collections.Generic.Dictionary`2"
     ],
     "namespaceMappings": [
-      "*, ServiceReferenceAlmacen"
+      "*, ServiceReferenceAutenticacion"
     ],
     "targetFramework": "net9.0",
     "typeReuseMode": "All"

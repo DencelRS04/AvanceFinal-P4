@@ -1,25 +1,26 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using ServiceReferenceAlmacen;
-using ServiceReferenceAuth;
+using ServiceReferenceAutenticacion;
 using WebProducto.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 
-// Sesión para guardar el usuario logueado
-builder.Services.AddSession();
+// ?? AGREGAR SESSION ANTES DE builder.Build()
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddHttpContextAccessor();
 
-// Clientes WCF (Service References)
-builder.Services.AddTransient<ServiceClient>();         // WS_ALMACEN
-builder.Services.AddTransient<AutenticacionClient>();   // WS_AUTENTICACION
+// WCF Clients
+builder.Services.AddTransient<ServiceClient>();
+builder.Services.AddTransient<AutenticacionClient>();
 
-
-// Servicios de dominio
+// Services
 builder.Services.AddScoped<IAutenticacionService, AutenticacionService>();
 builder.Services.AddScoped<IAlmacenService, AlmacenService>();
 
@@ -33,11 +34,12 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
-app.UseSession();   // MUY IMPORTANTE: antes de MapRazorPages
+// ?? AGREGAR UseSession() ANTES de MapRazorPages
+app.UseSession();
+
+app.MapGet("/", () => Results.Redirect("/Account/Login"));
 
 app.MapRazorPages();
-
 app.Run();

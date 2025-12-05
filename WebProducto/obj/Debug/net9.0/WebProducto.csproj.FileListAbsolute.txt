@@ -1022,7 +1022,6 @@ C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\obj\Debug\net9.0\WebPro
 C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\obj\Debug\net9.0\WebProducto.genruntimeconfig.cache
 C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\obj\Debug\net9.0\ref\WebProducto.dll
 C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\bin\Debug\net9.0\Connected Services\ServiceReferenceAlmacen\ConnectedService.json
-C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\bin\Debug\net9.0\Connected Services\ServiceReferenceAuth\ConnectedService.json
 C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\bin\Debug\net9.0\System.ServiceModel.Http.dll
 C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\bin\Debug\net9.0\System.ServiceModel.NetFramingBase.dll
 C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\bin\Debug\net9.0\System.ServiceModel.NetTcp.dll
@@ -1082,3 +1081,4 @@ C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\bin\Debug\net9.0\ru\Sys
 C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\bin\Debug\net9.0\tr\System.ServiceModel.Primitives.resources.dll
 C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\bin\Debug\net9.0\zh-Hans\System.ServiceModel.Primitives.resources.dll
 C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\bin\Debug\net9.0\zh-Hant\System.ServiceModel.Primitives.resources.dll
+C:\Users\dence\OneDrive\Escritorio\Rep-Final\WebProducto\bin\Debug\net9.0\Connected Services\ServiceReferenceAutenticacion\ConnectedService.json

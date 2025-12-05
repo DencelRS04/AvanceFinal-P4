@@ -1,4 +1,4 @@
-﻿using ServiceReferenceAuth;
+﻿using ServiceReferenceAutenticacion;
 using System.Threading.Tasks;
 
 namespace WebProducto.Services
